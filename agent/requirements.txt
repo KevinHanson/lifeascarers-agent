@@ -1,0 +1,19 @@
+# Core dependencies for the LifeAsCarers AI Agent
+
+# LangChain ecosystem (for local Ollama + LLM workflows)
+langchain
+langchain-community
+langchain-ollama
+
+# Core utilities
+requests>=2.31.0
+python-dotenv>=1.0.1
+schedule>=1.2.0
+
+# Optional / helpful
+# openalexapi is not needed anymore since we now use the Dimensions API,
+# but you can leave it if you plan to use OpenAlex again later.
+# openalexapi>=1.0.0
+
+# Ollama client (used by langchain-ollama internally)
+ollama>=0.1.0

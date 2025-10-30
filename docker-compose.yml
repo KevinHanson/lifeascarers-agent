@@ -1,0 +1,57 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+    networks:
+      - agentnet
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 60s
+      timeout: 30s
+      retries: 15
+      start_period: 900s
+
+  agent:
+    build: ./agent
+    container_name: ai-agent
+    depends_on:
+      ollama:
+        condition: service_started   # (safer than waiting for “healthy” if Ollama loads slow)
+    environment:
+      - OLLAMA_API_URL=http://ollama:11434
+      - DIMENSIONS_API_KEY=${DIMENSIONS_API_KEY}
+    volumes:
+      - ./data:/app/data
+    networks:
+      - agentnet
+    restart: unless-stopped
+    command: >
+      sh -c "
+        echo '⏳ Waiting for Ollama...';
+        until curl -s http://ollama:11434/api/tags > /dev/null; do
+          echo '...still waiting...';
+          sleep 5;
+        done;
+        echo '✅ Ollama ready. Starting agent...';
+        python /app/agentic_pipeline.py
+      "
+
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    networks:
+      - agentnet
+    restart: unless-stopped
+
+networks:
+  agentnet:
+    driver: bridge

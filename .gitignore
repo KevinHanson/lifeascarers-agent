@@ -1,0 +1,88 @@
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+*.swp
+*.bak
+
+# ---- Virtual Environments ----
+.env/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+*.egg-info/
+
+# ---- Environment Files ----
+.env        # ✅ Protects your API keys and credentials
+*.env.local
+*.env.*
+
+# ---- Data & Output ----
+data/
+output/
+*.json
+*.csv
+*.xlsx
+*.db
+
+# ---- Docker ----
+# Build artifacts
+*.pid
+*.seed
+*.pid.lock
+*.sock
+docker-compose.override.yml
+Dockerfile.*.bak
+
+# Container volumes
+volumes/
+docker-data/
+*.tar
+
+# Ignore all local container runtime files
+**/tmp/
+**/.docker/
+**/.cache/
+
+# ---- IDEs & Editors ----
+.vscode/
+.idea/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# ---- macOS / Windows ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ---- Logs ----
+logs/
+*.log
+log/
+*.out
+*.err
+
+# ---- Node/npm (if OpenWebUI scripts involved) ----
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# ---- JetBrains / PyCharm ----
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# ---- Backup / Temp ----
+*.bak
+*.old
+*.orig
+*~
