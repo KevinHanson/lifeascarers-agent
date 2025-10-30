@@ -18,7 +18,7 @@ pip-wheel-metadata/
 *.egg-info/
 
 # ---- Environment Files ----
-.env        # ✅ Protects your API keys and credentials
+.env
 *.env.local
 *.env.*
 
